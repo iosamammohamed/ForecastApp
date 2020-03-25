@@ -3,3 +3,4 @@ Weather Forecast App provides the user with the weather forecast for Today and t
 
 Development stack: Matrial design, Retrofit, OkHttp, Room, Mvvm, LiveData, RxAndroid, Repository pattern, Kodein di, Location service.
 
+Note: Still working
