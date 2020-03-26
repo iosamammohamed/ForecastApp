@@ -1,12 +1,14 @@
-package com.o.weather.ui.weather
+package com.o.weather.ui.weather.current
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.o.weather.data.repository.weather.WeatherRepository
 
 @Suppress("UNCHECKED_CAST")
-class WeatherViewModelFactory(val weatherRepository: WeatherRepository): ViewModelProvider.Factory {
+class WeatherViewModelFactory(private val weatherRepository: WeatherRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return WeatherViewModel(weatherRepository) as T
+        return WeatherViewModel(
+            weatherRepository
+        ) as T
     }
 }

@@ -37,12 +37,14 @@ data class WeatherResponse(
         var windSpeed: Double=0.0,
         @SerializedName("weather_icons")
         @Ignore
-        var weatherIcons: List<String>? = null,
+        var weatherIcons: List<String> = emptyList(),
         var icon: String="",
         @SerializedName("weather_descriptions")
         @Ignore
-        var weatherDescriptions: List<String>? = null,
-        var description: String=""
+        var weatherDescriptions: List<String> = emptyList(),
+        var description: String="",
+        var country: String = "",
+        var city: String = ""
     ){
        // constructor(id: Int, feelsLike: Double, precip: Double, temperature: Double, visibility: Double): this(id, feelsLike, precip, temperature, visibility, windDir, windSpeed)
     }

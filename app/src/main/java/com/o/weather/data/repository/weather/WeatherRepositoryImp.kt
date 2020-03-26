@@ -5,24 +5,26 @@ import com.o.weather.data.model.WeatherResponse.Weather
 import com.o.weather.data.remote.WeatherApi
 import io.reactivex.Single
 
-class WeatherRepositoryImp(val weatherApi: WeatherApi, val weatherDao: WeatherDao): WeatherRepository {
+class WeatherRepositoryImp(private val weatherApi: WeatherApi,private val weatherDao: WeatherDao): WeatherRepository {
 
 
-    override fun getCurrentWeather(city: String, unit: String, shouldRefresh: Boolean): Single<Weather> {
+    override fun getCurrentWeather(city: String, shouldRefresh: Boolean): Single<Weather> {
         return if(shouldRefresh)
-            remoteCurrentWeather(city, unit).onErrorResumeNext {
+            remoteCurrentWeather(city).onErrorResumeNext {
                 localCurrentWeather()
             }
         else
             localCurrentWeather().onErrorResumeNext {
-                remoteCurrentWeather(city, unit)
+                remoteCurrentWeather(city)
             }
     }
 
-    private fun remoteCurrentWeather(city: String, unit: String): Single<Weather>{
-        return weatherApi.getCurrentWeather(city, unit).map {
-            it.weather.icon = it.weather.weatherIcons!![0]
-            it.weather.description = it.weather.weatherDescriptions!![0]
+    private fun remoteCurrentWeather(city: String): Single<Weather>{
+        return weatherApi.getCurrentWeather(city).map {
+            it.weather.icon = it.weather.weatherIcons[0]
+            it.weather.description = it.weather.weatherDescriptions[0]
+            it.weather.country = it.location.country
+            it.weather.city = it.location.name
             return@map it.weather
         }.doOnSuccess { weather ->
             weatherDao.upsert(weather)

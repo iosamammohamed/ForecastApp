@@ -1,9 +1,6 @@
 package com.o.weather.di
 
-import android.content.Context
 import com.o.weather.data.remote.WeatherApi
-import com.o.weather.data.remote.connection.ConnectivityInterceptor
-import com.o.weather.data.remote.connection.ConnectivityInterceptorImpl
 import com.o.weather.util.Constants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -21,8 +18,7 @@ import java.util.concurrent.TimeUnit
 val RetrofitModule = Kodein.Module("Retrofit_Module"){
     bind<Interceptor>() with singleton { getInterceptor() }
     bind<HttpLoggingInterceptor>() with singleton { getLoggerInterceptor() }
-    bind<ConnectivityInterceptor>() with singleton { getConnectivityInterceptor(instance()) }
-    bind<OkHttpClient>() with singleton { getOkHttp(instance(), instance(), instance()) }
+    bind<OkHttpClient>() with singleton { getOkHttp(instance(), instance()) }
     bind<Retrofit>() with singleton { getRetrofit(instance()) }
     bind<WeatherApi>() with singleton { getWeatherApi(instance()) }
 }
@@ -46,16 +42,13 @@ fun getInterceptor(): Interceptor{
      }
  }
 
-fun getConnectivityInterceptor(context: Context):ConnectivityInterceptor{
-        return ConnectivityInterceptorImpl(context)
-}
 
-fun getOkHttp(interceptor: Interceptor, connectivityInterceptor: ConnectivityInterceptor,loggingInterceptor: HttpLoggingInterceptor): OkHttpClient{
+fun getOkHttp(interceptor: Interceptor, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient{
     return OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
-        .addInterceptor(connectivityInterceptor)
-        //.addInterceptor(loggingInterceptor)
+        //.addInterceptor(connectivityInterceptor)
+        .addInterceptor(loggingInterceptor)
         .build()
 }
 

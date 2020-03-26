@@ -13,8 +13,7 @@ interface WeatherApi {
 
     @GET(Constants.CURRENT)
     fun getCurrentWeather(
-        @Query(Constants.QUERY) city: String,
-        @Query(Constants.UNITS) unit: String
+        @Query(Constants.QUERY) city: String
     ): Single<WeatherResponse>
 
 

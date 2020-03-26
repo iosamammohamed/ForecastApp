@@ -29,10 +29,21 @@
                 android:id="@+id/textView_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loading"
+                android:text="@string/loading"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/empty_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textSize="24sp"
+            android:text="@string/no_data"
+            />
 
 
         <LinearLayout
@@ -48,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                android:text="Patchy rain possible"
                 android:textSize="38sp"/>
 
 
@@ -61,15 +71,13 @@
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_width="0dp">
 
                     <TextView
                         android:id="@+id/weather_temperature"
-                        android:layout_weight="2"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        tools:text="25.0°C"
+                        android:layout_height="wrap_content"
                         android:textSize="38sp"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -78,12 +86,11 @@
                     <TextView
                         android:id="@+id/weather_feels_like_temperature"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:gravity="center_horizontal"
-                        android:text="bla bla"/>
+                        android:textSize="18sp"/>
 
                 </LinearLayout>
 
@@ -91,7 +98,8 @@
                     android:id="@+id/weather_condition_icon"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/weather_icon"
                     />
 
 
@@ -105,7 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:text="Wind: SE, 5.3 m/s"
                 android:layout_margin="8dp"/>
 
             <TextView
@@ -113,7 +120,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:text="Precipitation: 5 mm"
                 android:layout_margin="8dp"/>
 
             <TextView
@@ -121,8 +127,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:text="Visibility: 20 km"
                 android:layout_margin="8dp"/>
+
 
         </LinearLayout>
 
