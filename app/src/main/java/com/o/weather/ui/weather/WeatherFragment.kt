@@ -1,4 +1,4 @@
-package com.o.weather.ui.weather.current
+package com.o.weather.ui.weather
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -19,8 +19,6 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import com.o.weather.data.model.WeatherResponse.Weather
 import com.o.weather.providers.preference.PreferencesProvider
-import com.o.weather.ui.weather.LocationViewModel
-import com.o.weather.ui.weather.LocationViewModelFactory
 import kotlinx.android.synthetic.main.weather_fragment.*
 
 class WeatherFragment : Fragment(R.layout.weather_fragment), KodeinAware {
@@ -41,18 +39,18 @@ class WeatherFragment : Fragment(R.layout.weather_fragment), KodeinAware {
         viewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
         locationViewModel = ViewModelProvider(this, locationViewModelFactory).get(LocationViewModel::class.java)
         bindUI()
-        getWeather(shouldRefresh = true)
+        getWeather()
         swipe_refresh_layout.setOnRefreshListener {
-            getWeather(shouldRefresh = true)
+            getWeather()
         }
     }
 
 
-    private fun getWeather(shouldRefresh: Boolean){
+    private fun getWeather(){
         if(preferences.isUsingDeviceLocation()){
             getLocationAndCheckPermission()
         }else{
-            viewModel.getCurrentWeather(preferences.getManualLocation(), shouldRefresh)
+            viewModel.getCurrentWeather(preferences.getCustomLocation())
         }
     }
 
@@ -123,7 +121,7 @@ class WeatherFragment : Fragment(R.layout.weather_fragment), KodeinAware {
                locationViewModel.getLocation().observe(viewLifecycleOwner,
                    Observer<Location> {
                        location ->
-                       viewModel.getCurrentWeather("${location.latitude},${location.longitude}", true)
+                       viewModel.getCurrentWeather("${location.latitude},${location.longitude}")
                    })
     }
 

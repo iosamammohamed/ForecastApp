@@ -10,7 +10,7 @@ class PreferencesProviderImpl(val context: Context): PreferencesProvider {
     private val preferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(appContext)
 
-    override fun getManualLocation(): String{
+    override fun getCustomLocation(): String{
         return preferences.getString(appContext.getString(R.string.KEY_CUSTOM_LOCATION),
                                     appContext.getString(R.string.CUSTOM_LOCATION_LOCATION_DEFAULT_VALUE))!!
     }

@@ -4,19 +4,19 @@ import com.o.weather.data.local.WeatherDao
 import com.o.weather.data.model.WeatherResponse.Weather
 import com.o.weather.data.remote.WeatherApi
 import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class WeatherRepositoryImp(private val weatherApi: WeatherApi,private val weatherDao: WeatherDao): WeatherRepository {
 
 
-    override fun getCurrentWeather(city: String, shouldRefresh: Boolean): Single<Weather> {
-        return if(shouldRefresh)
-            remoteCurrentWeather(city).onErrorResumeNext {
-                localCurrentWeather()
-            }
-        else
-            localCurrentWeather().onErrorResumeNext {
-                remoteCurrentWeather(city)
-            }
+    override fun getCurrentWeather(city: String): Single<Weather> {
+        return remoteCurrentWeather(city).onErrorResumeNext {
+            localCurrentWeather()
+        }
     }
 
     private fun remoteCurrentWeather(city: String): Single<Weather>{

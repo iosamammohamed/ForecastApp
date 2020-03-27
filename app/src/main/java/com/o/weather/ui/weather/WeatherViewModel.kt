@@ -1,4 +1,4 @@
-package com.o.weather.ui.weather.current
+package com.o.weather.ui.weather
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,17 +19,18 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
 
     private val compositeDisposable = CompositeDisposable()
 
-    fun getCurrentWeather(city: String, shouldRefresh: Boolean){
+    fun getCurrentWeather(city: String){
         isLoading.value = true
         compositeDisposable.add(
-            weatherRepository.getCurrentWeather(city, shouldRefresh)
+            weatherRepository.getCurrentWeather(city)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {weatherData ->
+                println("hhhhhhhhh ${weatherData}")
                 weatherMLiveData.value = weatherData
                 isLoading.value = false
                 isEmpty.value = false
-            },{error ->
+            },{
                 isLoading.value = false
                 isEmpty.value = true
             })

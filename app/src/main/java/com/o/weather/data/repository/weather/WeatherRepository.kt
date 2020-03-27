@@ -6,5 +6,5 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface WeatherRepository {
-       fun getCurrentWeather(city: String, shouldRefresh: Boolean): Single<Weather>
+       fun getCurrentWeather(city: String): Single<Weather>
 }

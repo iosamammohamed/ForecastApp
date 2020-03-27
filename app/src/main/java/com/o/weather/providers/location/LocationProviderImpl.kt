@@ -20,7 +20,7 @@ class LocationProviderImpl(val context: Context) : LocationProvider {
     init {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context.applicationContext)
         locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
         locationRequest.interval = (10 * 1000).toLong() // 10 seconds
         locationRequest.fastestInterval = (5 * 1000).toLong() // 5 seconds
 
@@ -51,7 +51,6 @@ class LocationProviderImpl(val context: Context) : LocationProvider {
                  fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
             }
         }
-
         return  locationLiveData
     }
 

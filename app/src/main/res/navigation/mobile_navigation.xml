@@ -6,14 +6,9 @@
     app:startDestination="@id/weather_fragment">
     <fragment
         android:id="@+id/weather_fragment"
-        android:name="com.o.weather.ui.weather.current.WeatherFragment"
+        android:name="com.o.weather.ui.weather.WeatherFragment"
         android:label="weather_fragment"
         tools:layout="@layout/weather_fragment" />
-    <fragment
-        android:id="@+id/future_weather_fragment"
-        android:name="com.o.weather.ui.weather.future.FutureWeatherFragment"
-        android:label="weather_history_fragment"
-        tools:layout="@layout/weather_future_fragment" />
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.o.weather.ui.settings.SettingsFragment"

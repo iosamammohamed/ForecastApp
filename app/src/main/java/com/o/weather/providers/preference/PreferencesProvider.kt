@@ -2,7 +2,7 @@ package com.o.weather.providers.preference
 
 interface PreferencesProvider {
 
-    fun getManualLocation(): String
+    fun getCustomLocation(): String
     fun isUsingDeviceLocation(): Boolean
 
 }

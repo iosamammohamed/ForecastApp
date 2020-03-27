@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.o.weather.providers.location.LocationProvider
 
-class LocationViewModel(private val locationProvider: LocationProvider): ViewModel() {
+class LocationViewModel(val locationProvider: LocationProvider): ViewModel() {
 
     fun getLocation(): LiveData<Location>{
         return locationProvider.getLocation()

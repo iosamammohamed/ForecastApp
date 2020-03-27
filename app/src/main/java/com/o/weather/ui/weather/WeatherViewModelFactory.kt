@@ -1,4 +1,4 @@
-package com.o.weather.ui.weather.current
+package com.o.weather.ui.weather
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
